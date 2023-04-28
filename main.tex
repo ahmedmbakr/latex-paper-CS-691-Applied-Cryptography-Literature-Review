@@ -1,0 +1,103 @@
+\documentclass[conference]{IEEEtran}
+%\documentclass {article}
+
+\usepackage[table]{xcolor} % to color inside equation
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{hhline}
+\usepackage{tabularx,colortbl}
+% \usepackage{algorithmic}
+\usepackage[ruled]{algorithm2e}
+
+%%
+\usepackage{amsmath,varwidth,array,ragged2e}
+\usepackage{hyperref} % to use \autoref instead of \ref
+\renewcommand{\sectionautorefname}{Section}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathrsfs} % for \mathscr
+% \usepackage{algorithmic}
+% \usepackage{graphicx}
+\usepackage{float}
+% \usepackage{epsfig}
+% \usepackage{epstopdf}
+\usepackage{enumitem}
+\usepackage{soul}
+
+\usepackage{lipsum}
+
+% \usepackage{subfig}
+\usepackage{mathtools} % matrix alignment
+
+\usepackage{color}
+\usepackage[dvips]{graphicx}
+\usepackage{cleveref}
+
+% Acronym package (Choose one of the following options)
+% \usepackage{acronym} % if you want to show the list of abbreviations
+\usepackage[nolist]{acronym} % if you do not want to show the list of abbreviations
+% How to use:
+% \ac{id} -> 
+
+%\usepackage{qtree}
+\usepackage{tikz}
+%%\usetikzlibrary{trees}
+\usepackage[english]{babel}
+\usepackage{authblk}
+
+% green highlight
+\definecolor{g}{rgb}{0.56, 0.93, 0.56}
+\DeclareRobustCommand{\hlg}[1]{{\sethlcolor{g}\hl{#1}}}
+% blue highlight
+\definecolor{bb}{rgb}{0.56, 0.86, 0.93}
+\DeclareRobustCommand{\hlb}[1]{{\sethlcolor{bb}\hl{#1}}}
+
+% Workaround for the URL alignment in the bibliography. Note that this solution does not work with the Latex compiler, so consider changing the compiler if you are using overleaf to see the effect.
+\usepackage{url}
+\usepackage{breakurl}
+\def\UrlBreaks{\do\/\do-}
+ 
+\title{Privacy-Preserving V2V Charge Sharing Coordination using the Hungarian Algorithm}
+\vspace{-10mm}
+
+\author[1]{Ahmed Bakr}
+
+\affil[1]{Department of Computer Science, University of Alabama, AL, USA}
+
+\begin{acronym}
+    \acro{emr}[EMR]{Electronic Medical Record}
+    \acro{hd}[HD]{Health Department}
+\end{acronym}
+
+\begin{document}
+
+\maketitle
+
+%% Comment to hide page number
+ \thispagestyle{plain}
+ \pagestyle{plain}    
+% \chaptermark{Abbreviation}
+% \chapter*{List of Abbreviations}
+\input{tex/abstract}
+
+\acresetall % reset acronyms
+
+\input{tex/introduction}
+
+\input{tex/blockchainMarketplaceTraidingSchemes}
+
+\input{tex/securityAndPrivacyAnalysis}
+
+\input{tex/conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{tex/review.bib}
+
+\end{document} 
