@@ -83,21 +83,103 @@ In this section, the steps solution suggested in the paper is summarized, as sho
 \label{sec:blockchain-cloud-trasparent-data-marketing-consortium-management}
 
 \subsubsection{Problem Definition and Network Model}
+In IoT data Marketplace, data owners $DS$ have IoT devices, and third-party buyers $TP$ want to buy these data to find the users’ interests and analyze the data for their own future benefits.
+All data marketing operations should be effectively managed while keeping data confidentiality and user identity privacy on top of the requirements since all the operations are performed on the cloud.
+In addition, the data marketplace shall provide fairness for both $DS$ and $TP$.
+In other words, $DS$ should be paid well for selling their data and $TP$ should pay only if he receives the correct data.
+Moreover, depending on a centralized server lacks transparency and fairness since this entity may be hacked or worse, corrupt.
+In the end, a fair and transparent data marketplace that depends on distributed management is a necessity.
+
+The network model presented in this paper is shown in~\cref{fig:22-network-model}.
+The consortium blockchain consists of a distributed set of supervising nodes to offer fairness and transparency.
+Whereas the cloud server CS acts as an efficient data management unit where access to its data is controlled by the supervising nodes.
+CS shall check the validity of the commitments of the data stored on its servers whenever new data is submitted to be stored by a DS. Those commitments prove the authenticity of the data stored on CS and that these data belong to DS.
+
+\begin{figure}
+\centering
+  \includegraphics[width=0.9\linewidth]{imgs/22-network-model.eps}
+  \caption{Network model~\cite{liu2022blockchain}}
+  \label{fig:22-network-model}
+  %\vspace{-5mm}
+\end{figure}
 
 \subsubsection{Contributions}
 
+This paper presents data marketplace exchange using blockchain technology and a cloud server which are managed by consortium management to ensure fairness and transparency.
+The contributions of this paper can be summarized as follows:
+
+\begin{itemize}
+    \item A hybrid fair data marketing architecture is introduced that is based on a cloud server and a consortium blockchain.
+    By financial incentives and succinct ‘commitments’ of marketing operations, the protocol can achieve marketing fairness and effective detection of unfair marketing operations
+    \item The requirements of GDPR are all met
+    \item The identity of the data owners $DS$ is preserved with the ability to expose any malicious users by the consortium management 
+\end{itemize}
+
 \subsubsection{Threat Model}
 
+In this paper, CS may be malicious that he won't check the validity of the commitments submitted by DS because its goal is to maximize its profit regardless of the correctness of the submitted data.
+In addition, the blockchain is an immutable distributed storage that provides automatic contract executions.
+TP is a rational party who wants to pay for the data he requests if the correctness of it is guaranteed.
+Additionally, DS is also a rational user who wants to trade if the marketing requirements and fair payments are achieved.
+Finally, SA consists of a set of trusted supervising nodes.
+
 \subsubsection{Used Schemes}
+The paper depends on the following primitives in its solution:
+
+\begin{itemize}
+    \item \textbf{ZKP}: This scheme is used for the seller to prove knowledge of a secret without revealing the secret itself to the buyer
+    \item \textbf{PVSS}~\cite{schoenmakers1999simple}: A $(t,n)$ PVSS scheme enables a dealer holding a secret s to share the secret with n participants $(P_1, P_2, ..., P_n)$, where t-out-of-n participants can later combine the shares and recover the secret. In this paper, the seller splits his secret identity into $n$ secret shares that he shares with the supervising nodes. Later, if the user shows a malicious activity, $t$ out of $n$ supervising nodes can collaborate to reveal his real identity using those secret shares
+    \item \textbf{PS Signature}~\cite{pointcheval2018reassessing}: A short signature scheme with a randomized verification mechanism. In this paper, after the secret shares are sent by the seller to the supervising nodes as discussed in the PVSS scheme, each supervising node signs his own share and returns it back to the seller. After that, the seller aggregates the signatures he gets from the supervising nodes on the secret shares. The output of the signature aggregation process is the user's anonymous identity
+    \item \textbf{El-gamal Encryption}: This scheme is used to encrypt the symmetric key used by the seller to encrypt his plain data
+\end{itemize}
 
 \subsubsection{Solution Overview}
+The solution provided in the paper can be summarized in five main steps, as follows:
+
+\begin{itemize}
+    \item \textbf{System Setup}: SA initializes a consortium blockchain network and sets the public parameters. In addition, the public and private keys for each SA are set up for the schemes: PS, PVSS, and Elgamal
+    \item \textbf{Registration}: TP and CS register themselves to get a membership to access the blockchain.
+    Moreover, DS registers himself as shown in~\cref{fig:22-ds-registration}
+    \item \textbf{Off-chain Data Listing}: The sequence diagram for DS to list the data item that she wants to trade inside CS is shown in~\cref{fig:22-off-chain-data-listing}
+    \item \textbf{On/Off-chain Trading}: The sequence diagram for DS to trade with TP using the smart contract is depicted in~\cref{fig:22-off-chain-trading}
+    \item \textbf{User Tracing}: The identity of DS should be traced and exposed in the following cases.
+    First, If the commitments submitted by DS are not valid when checked against the data items listed in the CS.
+    Second, If TP finds that the description of the file after decryption does not match the description originally submitted by DS when the smart contract was created.
+    If any of these conditions apply, the supervising nodes cooperate together to reveal the identity of DS following $PVSS.Recover$ algorithm
+\end{itemize}
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\linewidth]{imgs/22-sequenceRegisterDs.eps}
+  \caption{DS registration}
+  \label{fig:22-ds-registration}
+  %\vspace{-5mm}
+\end{figure}
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\linewidth]{imgs/22-sequenceDataListing.eps}
+  \caption{Off-chain data listing}
+  \label{fig:22-off-chain-data-listing}
+  %\vspace{-5mm}
+\end{figure}
+
+\begin{figure*}
+\centering
+  \includegraphics[width=1\linewidth]{imgs/22-sequenceTrading.eps}
+  \caption{On/Off-chain trading}
+  \label{fig:22-off-chain-trading}
+  %\vspace{-5mm}
+\end{figure*}
 
 \subsection{A Blockchain-based Medical Data Marketplace with Trustless Fair Exchange and Access~\cite{alsharif2020blockchain}}
 \label{sec:blockchain-based-medical-data-marketplace-20}
 
 \subsubsection{Problem Definition and Network Model}
 
+
 \subsubsection{Contributions}
+
 
 \subsubsection{Threat Model}
 
