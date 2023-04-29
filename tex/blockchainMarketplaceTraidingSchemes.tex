@@ -176,13 +176,63 @@ The solution provided in the paper can be summarized in five main steps, as foll
 \label{sec:blockchain-based-medical-data-marketplace-20}
 
 \subsubsection{Problem Definition and Network Model}
+High demand for clinical research necessitates novel medical data marketplaces to facilitate medical data and records trading between medical data sellers and interested buyers in a secure manner.
+Therefore, flexible access control should be considered when designing such a marketplace.
+For example, some sellers may be interested to sell their medical records to research institutes only within some predefined geographical areas.
+
+\Cref{fig:20-network-model} shows the network model presented in the paper.
+KDC initializes the global parameters and provides all entities with their public/private key pairs.
+In addition, it provided the buyers with their attributes and the corresponding decryption key for each attribute.
+The blockchain network stores and executes smart contracts initiated by sellers.
+Moreover, the peer-to-peer network is used to store off-chain encrypted data by sellers.
 
 
 \subsubsection{Contributions}
+In this paper, the authors propose a model for medical data marketplace with flexible access control that is based on a trustless environment.
+In particular, they developed a mechanism to enable sellers to enforce an access control policy on the encrypted records using CP-ABE while allowing buyers to verify the correctness of the encrypted records using ZK-SNARK protocol.
 
+\begin{figure}
+\centering
+  \includegraphics[width=1\linewidth]{imgs/20-network-model.eps}
+  \caption{Network model~\cite{alsharif2020blockchain}}
+  \label{fig:20-network-model}
+  %\vspace{-5mm}
+\end{figure}
 
 \subsubsection{Threat Model}
+Both sellers and buyers can be malicious users.
+Towards this direction, a seller may try to claim a payment from a buyer without providing the correct access key to the encrypted medical records.
+Comparatively, a buyer may also want to have access to the medical records without paying the seller its due amount.
+Finally, the medical records are assumed to be authentic and they cannot be forged.
 
 \subsubsection{Used Schemes}
+In this paper, the following security primitives were used:
+
+\begin{itemize}
+    \item \textbf{CP-ABE}~\cite{bethencourt2007ciphertext}: Each entity is given a set of attributes that defines its identity.
+    Afterwards, anyone can generate a ciphertext that is associated with an access policy defined over those attributes.
+    Only the users who satisfy the access policy can decrypt the message
+    \item \textbf{ZK-SNARKs}~\cite{ben2013succinct}: It is an efficient and secure non-interactive protocol that allows a verifier to attest the untrusted prover knowledge of some secret inputs, called witnesses without revealing the secret inputs to anyone
+    \item \textbf{AES}
+\end{itemize}
 
 \subsubsection{Solution Overview}
+The solution provided in this paper comprises five steps.
+
+\begin{itemize}
+    \item \textbf{System Setup}: KDC generates the public/private key pairs for all users and assigns the attributes and the associated decryption keys to each buyer according to his identity
+    \item \textbf{Medical Records Encryption and Upload}:  The seller encrypts a record with the AES scheme, uploads it to the DSN network, and registers itself as the owner of this data item
+    \item \textbf{Document's Access Policy Creation}: The seller defines the access policy as a boolean expression over the set of attributes.
+    In addition, it creates proof of knowledge $\pi^{PoE}$ that proves correct encryption under the AES scheme and proves knowledge of the secret shares used to construct the access policy.
+    In the end, the seller initiates the smart contract with the address of the encrypted data on the peer-to-peer network and the file commitments
+    \item \textbf{Contingent Payment Deposit by Buyer}: The buyer browses the listings on the peer-to-peer network, downloads the encrypted file and the commitments for the file that he wants to buy, and verifies the correctness using the ZKP verification scheme.
+    Finally, the buyer deposits a contingent payment to the smart contract
+    \item \textbf{Off-chain Trustless Fair Exchange}: First, the buyer contacts the seller using the peer-to-peer network and sends him his public key.
+    Second, the seller verifies that the buyer's public key is listed in the pending requests on the smart contract, then she sends her public key to the buyer with a challenge for him to sign.
+    Third, after the buyer signs the challenge and sends it back to the seller, the seller verifies the correctness of the signature
+    Forth, the seller sends the hash of the secret value $hg$ as long as a proof of delivery $\pi^{PoD}$.
+    Fifth, the buyer verifies the correctness of the $\pi^{PoD}$ and signs on the the hash value $hg$
+    \item \textbf{Payment Withdraw}: The seller verifies the signature of the buyer, then he can send a redemption transaction request to the smart contract
+    \item \textbf{Access Control and Document Decryption}: After payment withdrawal, the buyer can read the secret value whose hash is $hg$ from the smart contract, which was the last piece in the puzzle needed to recover AES decryption key used to encrypt the document following CP-ABE decryption algorithm
+    
+\end{itemize}
