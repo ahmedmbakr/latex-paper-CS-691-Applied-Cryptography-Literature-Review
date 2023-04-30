@@ -117,7 +117,7 @@ The contributions of this paper can be summarized as follows:
 \begin{itemize}
     \item A hybrid fair data marketing architecture is introduced that is based on a cloud server and a consortium blockchain.
     By financial incentives and succinct ‘commitments’ of marketing operations, the protocol can achieve marketing fairness and effective detection of unfair marketing operations
-    \item The requirements of GDPR are all met
+    \item The requirements of \ac{gdpr} are all met
     \item The identity of the \ac{ds} is preserved with the ability to expose any malicious users by the consortium management 
 \end{itemize}
 
@@ -127,15 +127,15 @@ In this paper, \ac{cs} may be malicious that he won't check the validity of the 
 In addition, the blockchain is an immutable distributed storage that provides automatic contract executions.
 \ac{tp} is a rational party who wants to pay for the data he requests if the correctness of it is guaranteed.
 Additionally, \ac{ds} is also a rational user who wants to trade if the marketing requirements and fair payments are achieved.
-Finally, SA consists of a set of trusted supervising nodes.
+Finally, \ac{sa} consists of a set of trusted supervising nodes.
 
 \subsubsection{Used Schemes}
 The paper depends on the following primitives in its solution:
 
 \begin{itemize}
     \item \textbf{\ac{zkp}}: This scheme is used for the seller to prove knowledge of a secret without revealing the secret itself to the buyer
-    \item \textbf{PVSS}~\cite{schoenmakers1999simple}: A $(t,n)$ PVSS scheme enables a dealer holding a secret s to share the secret with n participants $(P_1, P_2, ..., P_n)$, where t-out-of-n participants can later combine the shares and recover the secret. In this paper, the seller splits his secret identity into $n$ secret shares that he shares with the supervising nodes. Later, if the user shows a malicious activity, $t$ out of $n$ supervising nodes can collaborate to reveal his real identity using those secret shares
-    \item \textbf{PS Signature}~\cite{pointcheval2018reassessing}: A short signature scheme with a randomized verification mechanism. In this paper, after the secret shares are sent by the seller to the supervising nodes as discussed in the PVSS scheme, each supervising node signs his own share and returns it back to the seller. After that, the seller aggregates the signatures he gets from the supervising nodes on the secret shares. The output of the signature aggregation process is the user's anonymous identity
+    \item \textbf{\ac{pvss}}~\cite{schoenmakers1999simple}: A $(t,n)$ \ac{pvss} scheme enables a dealer holding a secret s to share the secret with n participants $(P_1, P_2, ..., P_n)$, where t-out-of-n participants can later combine the shares and recover the secret. In this paper, the seller splits his secret identity into $n$ secret shares that he shares with the supervising nodes. Later, if the user shows a malicious activity, $t$ out of $n$ supervising nodes can collaborate to reveal his real identity using those secret shares
+    \item \textbf{\ac{ps} Signature}~\cite{pointcheval2018reassessing}: A short signature scheme with a randomized verification mechanism. In this paper, after the secret shares are sent by the seller to the supervising nodes as discussed in the \ac{pvss} scheme, each supervising node signs his own share and returns it back to the seller. After that, the seller aggregates the signatures he gets from the supervising nodes on the secret shares. The output of the signature aggregation process is the user's anonymous identity
     \item \textbf{El-gamal Encryption}: This scheme is used to encrypt the symmetric key used by the seller to encrypt his plain data
     \item \textbf{\ac{aes}}
 \end{itemize}
@@ -144,8 +144,8 @@ The paper depends on the following primitives in its solution:
 The solution provided in the paper can be summarized in five main steps, as follows:
 
 \begin{itemize}
-    \item \textbf{System Setup}: SA initializes a consortium blockchain network and sets the public parameters. 
-    In addition, the public and private keys for each SA are set up for the schemes: PS, PVSS, and Elgamal
+    \item \textbf{System Setup}: \ac{sa} initializes a consortium blockchain network and sets the public parameters. 
+    In addition, the public and private keys for each \ac{sa} are set up for the schemes: \ac{ps}, \ac{pvss}, and Elgamal
     \item \textbf{Registration}: \ac{tp} and \ac{cs} register themselves to get a membership to access the blockchain.
     Moreover, \ac{ds} registers himself as shown in~\cref{fig:22-ds-registration}
     \item \textbf{Off-chain Data Listing}: The sequence diagram for \ac{ds} to list the data item that she wants to trade inside \ac{cs} is shown in~\cref{fig:22-off-chain-data-listing}
@@ -189,7 +189,7 @@ Therefore, flexible access control should be considered when designing such a ma
 For example, some sellers may be interested to sell their medical records to research institutes only within some predefined geographical areas.
 
 \Cref{fig:20-network-model} shows the network model presented in the paper.
-KDC initializes the global parameters and provides all entities with their public/private key pairs.
+\ac{kdc} initializes the global parameters and provides all entities with their public/private key pairs.
 In addition, it provided the buyers with their attributes and the corresponding decryption key for each attribute.
 The blockchain network stores and executes smart contracts initiated by sellers.
 Moreover, the peer-to-peer network is used to store off-chain encrypted data by sellers.
@@ -197,7 +197,7 @@ Moreover, the peer-to-peer network is used to store off-chain encrypted data by 
 
 \subsubsection{Contributions}
 In this paper, the authors propose a model for medical data marketplace with flexible access control that is based on a trustless environment.
-In particular, they developed a mechanism to enable sellers to enforce an access control policy on the encrypted records using CP-ABE while allowing buyers to verify the correctness of the encrypted records using ZK-SNARK protocol.
+In particular, they developed a mechanism to enable sellers to enforce an access control policy on the encrypted records using \ac{cp-abe} while allowing buyers to verify the correctness of the encrypted records using \ac{zk-snark} protocol.
 
 \begin{figure}
 \centering
@@ -217,7 +217,7 @@ Finally, the medical records are assumed to be authentic and they cannot be forg
 In this paper, the following security primitives were used:
 
 \begin{itemize}
-    \item \textbf{CP-ABE}~\cite{bethencourt2007ciphertext}: Each entity is given a set of attributes that defines its identity.
+    \item \textbf{\ac{cp-abe}}~\cite{bethencourt2007ciphertext}: Each entity is given a set of attributes that defines its identity.
     Afterwards, anyone can generate a ciphertext that is associated with an access policy defined over those attributes.
     Only the users who satisfy the access policy can decrypt the message
     \item \textbf{ZK-SNARKs}~\cite{ben2013succinct}: It is an efficient and secure non-interactive protocol that allows a verifier to attest the untrusted prover knowledge of some secret inputs, called witnesses without revealing the secret inputs to anyone
@@ -228,8 +228,8 @@ In this paper, the following security primitives were used:
 The solution provided in this paper comprises five steps.
 
 \begin{itemize}
-    \item \textbf{System Setup}: KDC generates the public/private key pairs for all users and assigns the attributes and the associated decryption keys to each buyer according to his identity
-    \item \textbf{Medical Records Encryption and Upload}:  The seller encrypts a record with the \ac{aes} scheme, uploads it to the DSN network, then registers itself as the owner of this data item
+    \item \textbf{System Setup}: \ac{kdc} generates the public/private key pairs for all users and assigns the attributes and the associated decryption keys to each buyer according to his identity
+    \item \textbf{Medical Records Encryption and Upload}:  The seller encrypts a record with the \ac{aes} scheme, uploads it to the \ac{dsn} network, then registers itself as the owner of this data item
     \item \textbf{Document's Access Policy Creation}: The seller defines the access policy as a boolean expression over the set of attributes.
     In addition, it creates proof of knowledge $\pi^{PoE}$ that proves correct encryption under the \ac{aes} scheme and proves knowledge of the secret shares used to construct the access policy.
     In the end, the seller initiates the smart contract with the address of the encrypted data on the peer-to-peer network and the file commitments
@@ -241,6 +241,6 @@ The solution provided in this paper comprises five steps.
     Forth, the seller sends the hash of the secret value $hg$ as long as a proof of delivery $\pi^{PoD}$.
     Fifth, the buyer verifies the correctness of the $\pi^{PoD}$ and signs on the the hash value $hg$
     \item \textbf{Payment Withdraw}: The seller verifies the signature of the buyer, then he can send a redemption transaction request to the smart contract
-    \item \textbf{Access Control and Document Decryption}: After payment withdrawal, the buyer can read the secret value whose hash is $hg$ from the smart contract, which was the last piece in the puzzle needed to recover \ac{aes} decryption key used to encrypt the document following CP-ABE decryption algorithm
+    \item \textbf{Access Control and Document Decryption}: After payment withdrawal, the buyer can read the secret value whose hash is $hg$ from the smart contract, which was the last piece in the puzzle needed to recover \ac{aes} decryption key used to encrypt the document following \ac{cp-abe} decryption algorithm
     
 \end{itemize}
