@@ -131,6 +131,7 @@ The paper depends on the following primitives in its solution:
     \item \textbf{PVSS}~\cite{schoenmakers1999simple}: A $(t,n)$ PVSS scheme enables a dealer holding a secret s to share the secret with n participants $(P_1, P_2, ..., P_n)$, where t-out-of-n participants can later combine the shares and recover the secret. In this paper, the seller splits his secret identity into $n$ secret shares that he shares with the supervising nodes. Later, if the user shows a malicious activity, $t$ out of $n$ supervising nodes can collaborate to reveal his real identity using those secret shares
     \item \textbf{PS Signature}~\cite{pointcheval2018reassessing}: A short signature scheme with a randomized verification mechanism. In this paper, after the secret shares are sent by the seller to the supervising nodes as discussed in the PVSS scheme, each supervising node signs his own share and returns it back to the seller. After that, the seller aggregates the signatures he gets from the supervising nodes on the secret shares. The output of the signature aggregation process is the user's anonymous identity
     \item \textbf{El-gamal Encryption}: This scheme is used to encrypt the symmetric key used by the seller to encrypt his plain data
+    \item \textbf{AES}
 \end{itemize}
 
 \subsubsection{Solution Overview}

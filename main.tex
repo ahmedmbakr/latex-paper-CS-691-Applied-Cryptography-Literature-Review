@@ -15,6 +15,14 @@
 % \usepackage{algorithmic}
 \usepackage[ruled]{algorithm2e}
 
+% To add footnotes in a table
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+\makesavenoteenv{table}
+\makesavenoteenv{table*}
+
+\usepackage[flushleft]{threeparttable}
+
 %%
 \usepackage{amsmath,varwidth,array,ragged2e}
 \usepackage{hyperref} % to use \autoref instead of \ref
@@ -94,7 +102,7 @@
 
 \input{tex/blockchainMarketplaceTraidingSchemes}
 
-\input{tex/securityAndPrivacyAnalysis}
+\input{tex/schemesComparison}
 
 \input{tex/conclusion}
 
