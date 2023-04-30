@@ -2,7 +2,7 @@
 \label{sec:blockchain-marketplace-trading-schemes}
 
 This section presents three papers related to marketplace data trading using blockchain in different domains.
-The first and third papers address medical domain applications, while the second paper targets an IoT domain application.
+The first and third papers address medical domain applications, while the second paper targets an \ac{iot} domain application.
 The papers are presented in chronological order, from most recent to oldest.
 
 \subsection{Blockchain-based Fair and Fine-grained Data Trading with Privacy Preservation~\cite{xue2023blockchain}}
@@ -10,14 +10,14 @@ The papers are presented in chronological order, from most recent to oldest.
 
 \subsubsection{Problem Definition and Network Model}
 \label{sec:2023-problem-definition}
-In healthcare data trading, an EMR contains much personal information about the patient, such as her name, age, and address.
-EMR records have to be signed by a hospital to guarantee fair trading.
-A data buyer who can be a pharmaceutical company, for example, submits a smart contract to the marketplace that it is interested to buy EMR reports from patients (data sellers) who satisfy certain conditions, and it is interested only in a specific set of attributes.
-An example EMR report is shown in \cref{fig:example-emr-report}.
+In healthcare data trading, an \ac{emr} contains much personal information about the patient, such as her name, age, and address.
+\ac{emr} records have to be signed by a hospital to guarantee fair trading.
+A data buyer who can be a pharmaceutical company, for example, submits a smart contract to the marketplace that it is interested to buy \ac{emr} reports from patients (data sellers) who satisfy certain conditions, and it is interested only in a specific set of attributes.
+An example \ac{emr} report is shown in \cref{fig:example-emr-report}.
 The data buyer may be interested in \textbf{Diastolic Blood Pressure, Glucose, and Serum Insuline} attributes only for patients whose Diagnosis is Diabetes only.
 During the trading process, the identity of both the hospitals and the data sellers is hidden from the data buyer.
-The network model comprises five entities: HD, hospitals, data sellers, and data buyers, as shown in \cref{fig:network_model}.
-HD generates public system parameters.
+The network model comprises five entities: \ac{hd}, hospitals, data sellers, and data buyers, as shown in \cref{fig:network_model}.
+\ac{hd} generates public system parameters.
 
 \begin{figure}
 \centering
@@ -30,7 +30,7 @@ HD generates public system parameters.
 \begin{figure}
 \centering
   \includegraphics[width=0.8\linewidth]{imgs/23-example-emr-report.eps}
-  \caption{An example EMR report~\cite{xue2023blockchain}}
+  \caption{An example \ac{emr} report~\cite{xue2023blockchain}}
   \label{fig:example-emr-report}
   %\vspace{-5mm}
 \end{figure}
@@ -38,23 +38,23 @@ HD generates public system parameters.
 \subsubsection{Contributions}
 The contributions of this paper are as follows:
 \begin{itemize}
-    \item Present a strategy for the data seller to sell the EMR report in parts (individual attributes), without affecting the ability of their verification
-    \item Data fields attributes are signed by the hospital to ensure the integrity of the EMR reports while hiding the real identity of the hospital from the data buyer
+    \item Present a strategy for the data seller to sell the \ac{emr} report in parts (individual attributes), without affecting the ability of their verification
+    \item Data fields attributes are signed by the hospital to ensure the integrity of the \ac{emr} reports while hiding the real identity of the hospital from the data buyer
 \end{itemize}
 
 \subsubsection{Threat Model}
-In this paper, HD and hospitals are honest.
+In this paper, \ac{hd} and hospitals are honest.
 Data sellers and buyers can be malicious, as for data sellers, they want to gain as much money from data buyers as they could.
-On the other hand, data buyers want to get access to the EMR reports without paying or get access to private information about the patients or the hospitals that they are not supposed to have access to.
+On the other hand, data buyers want to get access to the \ac{emr} reports without paying or get access to private information about the patients or the hospitals that they are not supposed to have access to.
 
 \subsubsection{Used Schemes}
 The paper uses the following building blocks:
 
 \begin{itemize}
     \item \textbf{Structure-preserving Signature}~\cite{gay2018more}: A signature scheme that offers signature randomization and proved to be efficient in verification. That is why it is used in blockchain applications
-    \item \textbf{ZKP}: This scheme is used to prove knowledge of correct encryption of the EMR report by the seller without revealing the encryption secret key to the buyer
-    \item \textbf{Merkle Hash Tree}: This structure is used to hash the attributes inside an EMR report to prove that the attributes are related to the same report
-    \item \textbf{AES}: This scheme is used to encrypt the attributes with a symmetric key $k$
+    \item \textbf{\ac{zkp}}: This scheme is used to prove knowledge of correct encryption of the \ac{emr} report by the seller without revealing the encryption secret key to the buyer
+    \item \textbf{Merkle Hash Tree}: This structure is used to hash the attributes inside an \ac{emr} report to prove that the attributes are related to the same report
+    \item \textbf{\ac{aes}}: This scheme is used to encrypt the attributes with a symmetric key $k$
     \item \textbf{El-gamal Encryption}: This scheme is used to encrypt the symmetric key $k$ using the buyer's public key
 \end{itemize}
 
@@ -63,15 +63,15 @@ The paper uses the following building blocks:
 In this section, the solution suggested in the paper is summarized, as shown in~\cref{fig:23-interactions-through-smart-contract} and following the example presented in \cref{sec:2023-problem-definition}:
 
 \begin{itemize}
-    \item \textbf{Policy Definition}: If the data buyer wants to gather EMR reports related to diabetes, then a smart contract will be initiated by him stating the requirements in terms of mandatory attribute values in the report and the attributes required to be gathered from the seller and signs them. 
+    \item \textbf{Policy Definition}: If the data buyer wants to gather \ac{emr} reports related to diabetes, then a smart contract will be initiated by him stating the requirements in terms of mandatory attribute values in the report and the attributes required to be gathered from the seller and signs them. 
     In this case, the attribute value \textit{Disease} shall have the value \textit{diabetes}, and the attribute required to be collected from the users are: \textit{Glucose, Diastolic Blood Pressure, Serum Insulin, and Age}. 
     In addition, he deposits the data reward to the smart contract
     \item \textbf{Policy Verification}: If the data seller has the required attributes, she verifies the signature on the required attributes using the buyer's public key
-    \item \textbf{Present}: The data seller proves that she has the required data by sending the signature on the attributes, the ciphertext of the attribute values $CB$, and a ZKP of the correct encryption
+    \item \textbf{Present}: The data seller proves that she has the required data by sending the signature on the attributes, the ciphertext of the attribute values $CB$, and a \ac{zkp} of the correct encryption
     \item The smart contract checks the proof that the data seller has the required legitimate attributes, as posted by the data seller. 
     Then it sends a notification to the data buyer, who will recheck the proof and that the data seller meets the requirements posted in the definition of the policy, then he sends a confirmation message $CM$ to the smart contract
     \item \textbf{Ciphertext Generation}: The data seller encrypts the attributes encryption key $k$ with the buyer's public key $bpk$ to form the ciphertext $CK`$. 
-    She sends the ciphertext with the ZKP of the correct encryption $\pi_b$ to the smart contract
+    She sends the ciphertext with the \ac{zkp} of the correct encryption $\pi_b$ to the smart contract
     \item \textbf{Ciphertext Retrieval}: The smart contract checks the validity of the proof and sends a notification to the data buyer. 
     Afterward, The data buyer retrieves the ciphertext key and decrypts $CB$ to get the attribute values required
 \end{itemize}
@@ -88,18 +88,18 @@ In this section, the solution suggested in the paper is summarized, as shown in~
 \label{sec:blockchain-cloud-trasparent-data-marketing-consortium-management}
 
 \subsubsection{Problem Definition and Network Model}
-In IoT data Marketplace, data owners $DS$ have IoT devices, and third-party buyers $TP$ want to buy these data to find the users’ interests and analyze the data for their own future benefits.
+In \ac{iot} data Marketplace, \ac{ds} have \ac{iot} devices, and \ac{tp} want to buy these data to find the users’ interests and analyze the data for their own future benefits.
 All data marketing operations should be effectively managed while keeping data confidentiality and user identity privacy on top of the requirements since all the operations are performed on the cloud.
-In addition, the data marketplace shall provide fairness for both $DS$ and $TP$.
-In other words, $DS$ should be paid well for selling their data and $TP$ should pay only if he receives the correct data.
+In addition, the data marketplace shall provide fairness for both \ac{ds} and \ac{tp}.
+In other words, \ac{ds} should be paid well for selling their data and \ac{tp} should pay only if he receives the correct data.
 Moreover, depending on a centralized server lacks transparency and fairness since this entity may be hacked or worse, corrupt.
 In the end, a fair and transparent data marketplace that depends on distributed management is a necessity.
 
 The network model presented in this paper is shown in~\cref{fig:22-network-model}.
 The consortium blockchain consists of a distributed set of supervising nodes to offer fairness and transparency.
-Whereas the cloud server CS acts as an efficient data management unit where access to its data is controlled by the supervising nodes.
-CS shall check the validity of the commitments of the data stored on its servers whenever new data is submitted to be stored by a DS. 
-Those commitments prove the authenticity of the data stored on CS and that this data belongs to DS.
+Whereas the \ac{cs} acts as an efficient data management unit where access to its data is controlled by the supervising nodes.
+\ac{cs} shall check the validity of the commitments of the data stored on its servers whenever new data is submitted to be stored by a \ac{ds}. 
+Those commitments prove the authenticity of the data stored on \ac{cs} and that this data belongs to \ac{ds}.
 
 \begin{figure}
 \centering
@@ -118,26 +118,26 @@ The contributions of this paper can be summarized as follows:
     \item A hybrid fair data marketing architecture is introduced that is based on a cloud server and a consortium blockchain.
     By financial incentives and succinct ‘commitments’ of marketing operations, the protocol can achieve marketing fairness and effective detection of unfair marketing operations
     \item The requirements of GDPR are all met
-    \item The identity of the data owners $DS$ is preserved with the ability to expose any malicious users by the consortium management 
+    \item The identity of the \ac{ds} is preserved with the ability to expose any malicious users by the consortium management 
 \end{itemize}
 
 \subsubsection{Threat Model}
 
-In this paper, CS may be malicious that he won't check the validity of the commitments submitted by DS because its goal is to maximize its profit regardless of the correctness of the submitted data.
+In this paper, \ac{cs} may be malicious that he won't check the validity of the commitments submitted by \ac{ds} because its goal is to maximize its profit regardless of the correctness of the submitted data.
 In addition, the blockchain is an immutable distributed storage that provides automatic contract executions.
-TP is a rational party who wants to pay for the data he requests if the correctness of it is guaranteed.
-Additionally, DS is also a rational user who wants to trade if the marketing requirements and fair payments are achieved.
+\ac{tp} is a rational party who wants to pay for the data he requests if the correctness of it is guaranteed.
+Additionally, \ac{ds} is also a rational user who wants to trade if the marketing requirements and fair payments are achieved.
 Finally, SA consists of a set of trusted supervising nodes.
 
 \subsubsection{Used Schemes}
 The paper depends on the following primitives in its solution:
 
 \begin{itemize}
-    \item \textbf{ZKP}: This scheme is used for the seller to prove knowledge of a secret without revealing the secret itself to the buyer
+    \item \textbf{\ac{zkp}}: This scheme is used for the seller to prove knowledge of a secret without revealing the secret itself to the buyer
     \item \textbf{PVSS}~\cite{schoenmakers1999simple}: A $(t,n)$ PVSS scheme enables a dealer holding a secret s to share the secret with n participants $(P_1, P_2, ..., P_n)$, where t-out-of-n participants can later combine the shares and recover the secret. In this paper, the seller splits his secret identity into $n$ secret shares that he shares with the supervising nodes. Later, if the user shows a malicious activity, $t$ out of $n$ supervising nodes can collaborate to reveal his real identity using those secret shares
     \item \textbf{PS Signature}~\cite{pointcheval2018reassessing}: A short signature scheme with a randomized verification mechanism. In this paper, after the secret shares are sent by the seller to the supervising nodes as discussed in the PVSS scheme, each supervising node signs his own share and returns it back to the seller. After that, the seller aggregates the signatures he gets from the supervising nodes on the secret shares. The output of the signature aggregation process is the user's anonymous identity
     \item \textbf{El-gamal Encryption}: This scheme is used to encrypt the symmetric key used by the seller to encrypt his plain data
-    \item \textbf{AES}
+    \item \textbf{\ac{aes}}
 \end{itemize}
 
 \subsubsection{Solution Overview}
@@ -146,20 +146,20 @@ The solution provided in the paper can be summarized in five main steps, as foll
 \begin{itemize}
     \item \textbf{System Setup}: SA initializes a consortium blockchain network and sets the public parameters. 
     In addition, the public and private keys for each SA are set up for the schemes: PS, PVSS, and Elgamal
-    \item \textbf{Registration}: TP and CS register themselves to get a membership to access the blockchain.
-    Moreover, DS registers himself as shown in~\cref{fig:22-ds-registration}
-    \item \textbf{Off-chain Data Listing}: The sequence diagram for DS to list the data item that she wants to trade inside CS is shown in~\cref{fig:22-off-chain-data-listing}
-    \item \textbf{On/Off-chain Trading}: The sequence diagram for DS to trade with TP using the smart contract is depicted in~\cref{fig:22-off-chain-trading}
-    \item \textbf{User Tracing}: The identity of DS should be traced and exposed in the following cases.
-    First, If the commitments submitted by DS are not valid when checked against the data items listed in the CS.
-    Second, If TP finds that the description of the file after decryption does not match the description originally submitted by DS when the smart contract was created.
-    If any of these conditions apply, the supervising nodes cooperate together to reveal the identity of DS following $PVSS.Recover$ algorithm
+    \item \textbf{Registration}: \ac{tp} and \ac{cs} register themselves to get a membership to access the blockchain.
+    Moreover, \ac{ds} registers himself as shown in~\cref{fig:22-ds-registration}
+    \item \textbf{Off-chain Data Listing}: The sequence diagram for \ac{ds} to list the data item that she wants to trade inside \ac{cs} is shown in~\cref{fig:22-off-chain-data-listing}
+    \item \textbf{On/Off-chain Trading}: The sequence diagram for \ac{ds} to trade with \ac{tp} using the smart contract is depicted in~\cref{fig:22-off-chain-trading}
+    \item \textbf{User Tracing}: The identity of \ac{ds} should be traced and exposed in the following cases.
+    First, If the commitments submitted by \ac{ds} are not valid when checked against the data items listed in the \ac{cs}.
+    Second, If \ac{tp} finds that the description of the file after decryption does not match the description originally submitted by \ac{ds} when the smart contract was created.
+    If any of these conditions apply, the supervising nodes cooperate together to reveal the identity of \ac{ds} following $PVSS.Recover$ algorithm
 \end{itemize}
 
 \begin{figure}
 \centering
   \includegraphics[width=1\linewidth]{imgs/22-sequenceRegisterDs.eps}
-  \caption{DS registration}
+  \caption{\ac{ds} registration}
   \label{fig:22-ds-registration}
   %\vspace{-5mm}
 \end{figure}
@@ -221,7 +221,7 @@ In this paper, the following security primitives were used:
     Afterwards, anyone can generate a ciphertext that is associated with an access policy defined over those attributes.
     Only the users who satisfy the access policy can decrypt the message
     \item \textbf{ZK-SNARKs}~\cite{ben2013succinct}: It is an efficient and secure non-interactive protocol that allows a verifier to attest the untrusted prover knowledge of some secret inputs, called witnesses without revealing the secret inputs to anyone
-    \item \textbf{AES}
+    \item \textbf{\ac{aes}}
 \end{itemize}
 
 \subsubsection{Solution Overview}
@@ -229,11 +229,11 @@ The solution provided in this paper comprises five steps.
 
 \begin{itemize}
     \item \textbf{System Setup}: KDC generates the public/private key pairs for all users and assigns the attributes and the associated decryption keys to each buyer according to his identity
-    \item \textbf{Medical Records Encryption and Upload}:  The seller encrypts a record with the AES scheme, uploads it to the DSN network, then registers itself as the owner of this data item
+    \item \textbf{Medical Records Encryption and Upload}:  The seller encrypts a record with the \ac{aes} scheme, uploads it to the DSN network, then registers itself as the owner of this data item
     \item \textbf{Document's Access Policy Creation}: The seller defines the access policy as a boolean expression over the set of attributes.
-    In addition, it creates proof of knowledge $\pi^{PoE}$ that proves correct encryption under the AES scheme and proves knowledge of the secret shares used to construct the access policy.
+    In addition, it creates proof of knowledge $\pi^{PoE}$ that proves correct encryption under the \ac{aes} scheme and proves knowledge of the secret shares used to construct the access policy.
     In the end, the seller initiates the smart contract with the address of the encrypted data on the peer-to-peer network and the file commitments
-    \item \textbf{Contingent Payment Deposit by Buyer}: The buyer browses the listings on the peer-to-peer network, downloads the encrypted file and the commitments for the file that he wants to buy, and verifies the correctness using the ZKP verification scheme.
+    \item \textbf{Contingent Payment Deposit by Buyer}: The buyer browses the listings on the peer-to-peer network, downloads the encrypted file and the commitments for the file that he wants to buy, and verifies the correctness using the \ac{zkp} verification scheme.
     Finally, the buyer deposits a contingent payment to the smart contract
     \item \textbf{Off-chain Trustless Fair Exchange}: First, the buyer contacts the seller using the peer-to-peer network and sends him his public key.
     Second, the seller verifies that the buyer's public key is listed in the pending requests on the smart contract, then she sends her public key to the buyer with a challenge for him to sign.
@@ -241,6 +241,6 @@ The solution provided in this paper comprises five steps.
     Forth, the seller sends the hash of the secret value $hg$ as long as a proof of delivery $\pi^{PoD}$.
     Fifth, the buyer verifies the correctness of the $\pi^{PoD}$ and signs on the the hash value $hg$
     \item \textbf{Payment Withdraw}: The seller verifies the signature of the buyer, then he can send a redemption transaction request to the smart contract
-    \item \textbf{Access Control and Document Decryption}: After payment withdrawal, the buyer can read the secret value whose hash is $hg$ from the smart contract, which was the last piece in the puzzle needed to recover AES decryption key used to encrypt the document following CP-ABE decryption algorithm
+    \item \textbf{Access Control and Document Decryption}: After payment withdrawal, the buyer can read the secret value whose hash is $hg$ from the smart contract, which was the last piece in the puzzle needed to recover \ac{aes} decryption key used to encrypt the document following CP-ABE decryption algorithm
     
 \end{itemize}
