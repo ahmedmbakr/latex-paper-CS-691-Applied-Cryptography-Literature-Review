@@ -60,15 +60,20 @@ The paper uses the following building blocks:
 
 \subsubsection{Solution Overview}
 
-In this section, the steps solution suggested in the paper is summarized, as shown in~\cref{fig:23-interactions-through-smart-contract} and following the example presented in \cref{sec:2023-problem-definition}:
+In this section, the solution suggested in the paper is summarized, as shown in~\cref{fig:23-interactions-through-smart-contract} and following the example presented in \cref{sec:2023-problem-definition}:
 
 \begin{itemize}
-    \item \textbf{Policy Definition}: If the data buyer wants to gather EMR reports related to diabetes, then a smart contract will be initiated by him stating the requirements in terms of mandatory attribute values in the report and the attributes required to be gathered from the seller and signs them. In this case, the attribute value \textit{Disease} shall have the value \textit{diabetes}, and the attribute required to be collected from the users are: \textit{Glucose, Diastolic Blood Pressure, Serum Insulin, and Age}. In addition, he deposits the data reward to the smart contract
+    \item \textbf{Policy Definition}: If the data buyer wants to gather EMR reports related to diabetes, then a smart contract will be initiated by him stating the requirements in terms of mandatory attribute values in the report and the attributes required to be gathered from the seller and signs them. 
+    In this case, the attribute value \textit{Disease} shall have the value \textit{diabetes}, and the attribute required to be collected from the users are: \textit{Glucose, Diastolic Blood Pressure, Serum Insulin, and Age}. 
+    In addition, he deposits the data reward to the smart contract
     \item \textbf{Policy Verification}: If the data seller has the required attributes, she verifies the signature on the required attributes using the buyer's public key
     \item \textbf{Present}: The data seller proves that she has the required data by sending the signature on the attributes, the ciphertext of the attribute values $CB$, and a ZKP of the correct encryption
-    \item The smart contract checks the proof that the data seller has the required legitimate attributes, as posted by the data seller. Then it sends a notification to the data buyer, who will recheck the proof and that the data seller meets the requirements posted in the definition of the policy, then he sends a confirmation message $CM$ to the smart contract
-    \item \textbf{Ciphertext Generation}: The data seller encrypts the attributes encryption key $k$ with the buyer's public key $bpk$ to form the ciphertext $CK`$. She sends the ciphertext with the ZKP of the correct encryption $\pi_b$ to the smart contract
-    \item \textbf{Ciphertext Retrieval}: The smart contract checks the validity of the proof and sends a notification to the data buyer. Afterward, The data buyer retrieves the ciphertext key and decrypts $CB$ to get the attribute values required
+    \item The smart contract checks the proof that the data seller has the required legitimate attributes, as posted by the data seller. 
+    Then it sends a notification to the data buyer, who will recheck the proof and that the data seller meets the requirements posted in the definition of the policy, then he sends a confirmation message $CM$ to the smart contract
+    \item \textbf{Ciphertext Generation}: The data seller encrypts the attributes encryption key $k$ with the buyer's public key $bpk$ to form the ciphertext $CK`$. 
+    She sends the ciphertext with the ZKP of the correct encryption $\pi_b$ to the smart contract
+    \item \textbf{Ciphertext Retrieval}: The smart contract checks the validity of the proof and sends a notification to the data buyer. 
+    Afterward, The data buyer retrieves the ciphertext key and decrypts $CB$ to get the attribute values required
 \end{itemize}
 
 \begin{figure}
@@ -93,7 +98,8 @@ In the end, a fair and transparent data marketplace that depends on distributed 
 The network model presented in this paper is shown in~\cref{fig:22-network-model}.
 The consortium blockchain consists of a distributed set of supervising nodes to offer fairness and transparency.
 Whereas the cloud server CS acts as an efficient data management unit where access to its data is controlled by the supervising nodes.
-CS shall check the validity of the commitments of the data stored on its servers whenever new data is submitted to be stored by a DS. Those commitments prove the authenticity of the data stored on CS and that these data belong to DS.
+CS shall check the validity of the commitments of the data stored on its servers whenever new data is submitted to be stored by a DS. 
+Those commitments prove the authenticity of the data stored on CS and that this data belongs to DS.
 
 \begin{figure}
 \centering
@@ -105,7 +111,7 @@ CS shall check the validity of the commitments of the data stored on its servers
 
 \subsubsection{Contributions}
 
-This paper presents data marketplace exchange using blockchain technology and a cloud server which are managed by consortium management to ensure fairness and transparency.
+This paper presents a data marketplace exchange mechanism using blockchain technology and a cloud server which are managed by consortium management to ensure fairness and transparency.
 The contributions of this paper can be summarized as follows:
 
 \begin{itemize}
@@ -138,7 +144,8 @@ The paper depends on the following primitives in its solution:
 The solution provided in the paper can be summarized in five main steps, as follows:
 
 \begin{itemize}
-    \item \textbf{System Setup}: SA initializes a consortium blockchain network and sets the public parameters. In addition, the public and private keys for each SA are set up for the schemes: PS, PVSS, and Elgamal
+    \item \textbf{System Setup}: SA initializes a consortium blockchain network and sets the public parameters. 
+    In addition, the public and private keys for each SA are set up for the schemes: PS, PVSS, and Elgamal
     \item \textbf{Registration}: TP and CS register themselves to get a membership to access the blockchain.
     Moreover, DS registers himself as shown in~\cref{fig:22-ds-registration}
     \item \textbf{Off-chain Data Listing}: The sequence diagram for DS to list the data item that she wants to trade inside CS is shown in~\cref{fig:22-off-chain-data-listing}
@@ -222,7 +229,7 @@ The solution provided in this paper comprises five steps.
 
 \begin{itemize}
     \item \textbf{System Setup}: KDC generates the public/private key pairs for all users and assigns the attributes and the associated decryption keys to each buyer according to his identity
-    \item \textbf{Medical Records Encryption and Upload}:  The seller encrypts a record with the AES scheme, uploads it to the DSN network, and registers itself as the owner of this data item
+    \item \textbf{Medical Records Encryption and Upload}:  The seller encrypts a record with the AES scheme, uploads it to the DSN network, then registers itself as the owner of this data item
     \item \textbf{Document's Access Policy Creation}: The seller defines the access policy as a boolean expression over the set of attributes.
     In addition, it creates proof of knowledge $\pi^{PoE}$ that proves correct encryption under the AES scheme and proves knowledge of the secret shares used to construct the access policy.
     In the end, the seller initiates the smart contract with the address of the encrypted data on the peer-to-peer network and the file commitments
